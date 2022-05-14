@@ -1,0 +1,16 @@
+#Print Welcome message 
+#Explain game
+#Pick random wordle
+#Loop 6 times
+    #Take user's input
+    #check if the word has 5 digits or check if it is a string...
+    #compare it to the wordle
+    #if they're not the same:
+        # print a 'do it again' statement 
+    #else
+        #Yay, you got it!
+#Print a message if they want to play again
+    #if yes:
+        #
+    #if no:
+        #print a message that the game is ending now and exit the program
