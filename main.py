@@ -36,6 +36,7 @@ def compare_strings(guess, random_wordle):
     return list(results.values())
 
 def game():
+    welcome_and_explanation()
     random_wordle = pick_random_wordle()
     print(random_wordle)
     counter = 0
