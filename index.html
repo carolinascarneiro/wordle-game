@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.10.5/brython.min.js">
+    </script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.10.5/brython_stdlib.js">
+    </script>
+</head>
+
+<body onload="brython()">
+    <h1 id="welcome"></h1>
+    <h2 id="explanation"></h2>
+    <label for="guess">Please insert your guess here:</label>
+    <input id="guess">
+    <button id ="" onclick="game()">Submit</button>
+
+    <script type="text/python" id="script0">
+    from browser import document, console, alert
+    import random
+    import time
+    import re
+    from typing import Counter
+    
+    wordles = ['swift', 'start']
+    
+    def welcome_and_explanation():
+        document['welcome'] <= 'Welcome to Wordle! yay'
+        document['explanation'] <= "Wordle is a game where players have to guess a mystery five-letter word, known as the 'wordle' in six attempts."
+    
+    def pick_random_wordle():
+        random_index = random.randrange(0, len(wordles))
+        random_wordle = wordles[random_index]
+        return random_wordle
+    
+    def take_guess():
+        guess = input('Please input your guess here: ')
+        return guess
+    
+    def compare_strings(guess, random_wordle):
+        results = {}
+        for position, character in enumerate(guess):
+            key = character + str(position)
+            if guess[position] == random_wordle[position]:
+                results[key] = "🟩"
+            elif character in random_wordle:
+                results[key] = "🟨"
+            else:
+                results[key] = "⬜"
+        return list(results.values())
+    
+    def game():
+        welcome_and_explanation()
+        random_wordle = pick_random_wordle()
+        print(random_wordle)
+        counter = 0
+        guess = take_guess()
+        while guess != random_wordle:
+            counter += 1
+            print(compare_strings(guess, random_wordle))
+            
+            guess = input('Your guess is wrong, please try again: ')
+            if counter == 7:
+                print('Your time is out')
+        print(compare_strings(guess, random_wordle))
+        print('You won!')
+        repeat_game()
+    
+    def repeat_game():
+        repeat_answer = input('Do you wanna play again?')
+        if repeat_answer.lower() == 'yes':
+            game()
+        else:
+            print("Wordle is closing now... thank you for participating!")
+            
+    game()
+    </script>
+</body>
+
+</html>
